@@ -1,0 +1,16 @@
+$primary: #335f32;
+$info: #ddf8e7;
+$light-green: #f3faf2;
+$secondary: #919191;
+$secondary-light: #f5f5de;
+$light: #fcfcfc;
+$light-gray: #f0f0f0;
+$orange-yellow: #f5f5de;
+$dark: #000;
+$bg-linear: transparent
+  linear-gradient(
+    180deg,
+    var(--primary-335f32) 0%,
+    var(--dark-grey-4b4b4b) 100%
+  )
+  0% 0% no-repeat padding-box;

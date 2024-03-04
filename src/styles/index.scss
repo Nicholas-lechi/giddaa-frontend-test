@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Millik";
+  src: local("Millik"), url(fonts/Millik.otf) format("opentype");
+}
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
+@import "bootstrap/scss/bootstrap.scss";
+
+body {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 300;
+}
+
+.dd {
+  font-family: Millik;
+}
