@@ -6,9 +6,11 @@ import SidebarNav from "./SidebarNav";
 const DashboardLayout: React.FC = () => {
   return (
     <Wrapper>
-      <SidebarNav />
-      <div className="dashboard-children container">
-        <Outlet />
+      <div className="dashboard-main">
+        <SidebarNav />
+        <div className="dashboard-children container">
+          <Outlet />
+        </div>
       </div>
     </Wrapper>
   );
@@ -16,6 +18,4 @@ const DashboardLayout: React.FC = () => {
 
 export default DashboardLayout;
 
-const Wrapper = styled.div`
-  display: flex;
-`;
+const Wrapper = styled.div``;
