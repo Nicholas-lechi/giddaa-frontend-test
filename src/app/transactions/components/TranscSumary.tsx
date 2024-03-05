@@ -1,55 +1,110 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import axios from "axios";
-import Cookies from "js-cookie";
-import { TOKEN_NAME } from "../../../utils/constant";
+import { useTransactionStore } from "../../store/transaction.store";
+import { formatter } from "../../../utils/helper";
 
 const TranscSumary: React.FC = () => {
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await axios.get("/developer/transaction/get-summary", {
-          headers: {
-            Authorization: Cookies.get(TOKEN_NAME),
-          },
-        });
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+  const { summary } = useTransactionStore();
+
+  const frequency = [
+    {
+      value: summary?.expectedNumberOfTransactions,
+      info: "/images/info.png",
+      type: "Expected Number of Transactions",
+    },
+    {
+      value: summary?.totalTransactions,
+      info: "/images/info.png",
+      type: "Total Transactions",
+    },
+    {
+      value: summary?.numberOfTransactionsLeft,
+      info: "/images/info.png",
+      type: "Number of Transactions Left",
+    },
+    {
+      value: summary?.averageMonthlyTransactions,
+      info: "/images/info.png",
+      type: "Average No of Transaction/ Month",
+    },
+  ];
+  const defaultbreakdown = [
+    {
+      value: formatter.format(summary?.expectedEarnings || 0),
+      info: "/images/info.png",
+      type: "Expected Earnings",
+    },
+    {
+      value: summary?.transactionDefaultRate,
+      info: "/images/info.png",
+      type: "Transaction Default Rate",
+    },
+    {
+      value: (
+        <p style={{ fontSize: "32px" }}>
+          <span className="text-danger " style={{ fontWeight: "bold" }}>
+            {summary?.totalMissedTransactions}
+          </span>
+          of {summary?.totalPaidTransactions}
+        </p>
+      ),
+      info: "/images/info.png",
+      type: "Customers who’ve missed payment",
+    },
+  ];
+  const expectedEarn = [
+    {
+      value: summary?.expectedEarnings,
+      info: "/images/info.png",
+      type: "Expected Earnings",
+    },
+    {
+      value: summary?.totalEarned,
+      info: "/images/info.png",
+      type: "Total Earnings",
+    },
+    {
+      value: summary?.leftToEarn,
+      info: "/images/info.png",
+      type: "Left To Earn",
+    },
+    {
+      value: summary?.averageAmountEarned,
+      info: "/images/info.png",
+      type: "Average Amount Earned",
+    },
+  ];
 
   return (
     <Wrapper>
       <p className="tag">Earnings Breakdown</p>
       <div className="expected">
-        {expectedEarn.map((expect) => (
-          <div className="content">
+        {expectedEarn.map((expect, i) => (
+          <div className="content" key={i}>
             <p className="info">
               <img src={expect.info} alt="" />
             </p>
-            <p className="value">{expect.value}</p>
+            <p className="value">{formatter.format(expect?.value || 0)}</p>
             <small className="type">{expect.type}</small>
           </div>
         ))}
       </div>
       <p className="tag mt-3">Frequency Breakdown</p>
       <div className="frequency">
-        {frequency.map((fer) => (
-          <div className="content">
+        {frequency.map((fer, i) => (
+          <div className="content" key={i}>
             <p className="info d-flex">
               <img src={fer.info} alt="" />
             </p>
-            <p className="value  ">{fer.value}</p>
+            <p className="value  ">{formatter.format(fer.value || 0)}</p>
             <small className="type">{fer.type}</small>
           </div>
         ))}
       </div>
       <p className="tag mt-3">Default Breakdown</p>
       <div className="default">
-        {defaultbreakdown.map((defaults) => (
-          <div className="content">
+        {defaultbreakdown.map((defaults, i) => (
+          <div className="content" key={i}>
             <p className="info">
               <img src={defaults.info} alt="" />
             </p>
@@ -70,72 +125,3 @@ const Wrapper = styled.div`
     font-weight: 600;
   }
 `;
-
-const frequency = [
-  {
-    value: "347",
-    info: "/images/info.png",
-    type: "Expected Number of Transactions",
-  },
-  {
-    value: "234",
-    info: "/images/info.png",
-    type: "Total Transactions",
-  },
-  {
-    value: "347",
-    info: "/images/info.png",
-    type: "Number of Transactions Left",
-  },
-  {
-    value: "32",
-    info: "/images/info.png",
-    type: "Average No of Transaction/ Month",
-  },
-];
-const defaultbreakdown = [
-  {
-    value: "34",
-    info: "/images/info.png",
-    type: "Expected Earnings",
-  },
-  {
-    value: "17%",
-    info: "/images/info.png",
-    type: "Transaction Default Rate",
-  },
-  {
-    value: (
-      <p style={{ fontSize: "32px" }}>
-        <span className="text-danger " style={{ fontWeight: "bold" }}>
-          24{" "}
-        </span>
-        of 98
-      </p>
-    ),
-    info: "/images/info.png",
-    type: "Customers who’ve missed payment",
-  },
-];
-const expectedEarn = [
-  {
-    value: "N112,000,000",
-    info: "/images/info.png",
-    type: "Expected Earnings",
-  },
-  {
-    value: "N80,000,000",
-    info: "/images/info.png",
-    type: "Total Earnings",
-  },
-  {
-    value: "N32,000,000",
-    info: "/images/info.png",
-    type: "Left To Earn",
-  },
-  {
-    value: "N365,000",
-    info: "/images/info.png",
-    type: "Average Amount Earned",
-  },
-];

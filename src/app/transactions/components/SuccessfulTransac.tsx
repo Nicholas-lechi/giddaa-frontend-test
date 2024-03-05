@@ -1,35 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import axios from "axios";
-import Cookies from "js-cookie";
-import { TOKEN_NAME } from "../../../utils/constant";
-
+import { useTransactionStore } from "../../store/transaction.store";
+import { formatter } from "../../../utils/helper";
 const SuccessfulTransac: React.FC = () => {
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await axios.get(
-          "/developer/transaction/get-succesful-payments",
-          {
-            headers: {
-              Authorization: Cookies.get(TOKEN_NAME),
-            },
-          }
-        );
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
-
+  const { successefulTransaction } = useTransactionStore();
   return (
     <Wrapper>
       <div className="content">
         <p className="info">
           <img src="/images/info.png" alt="" />
         </p>
-        <p className="value">234</p>
+        <p className="value">{successefulTransaction?.totalRecords}</p>
         <p className="type m-0">Successful Transactions</p>
       </div>
 
@@ -51,43 +32,49 @@ const SuccessfulTransac: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {tableItems.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>{item.amount}</td>
-                <td>{item.paymentT}</td>
-                <td>{item.property}</td>
-                <td>{item.plan}</td>
-                <td>{item.paymentDate}</td>
-                <td>
-                  <div className="dropdown">
-                    <button
-                      className="btn"
-                      style={{
-                        all: "unset",
-                        cursor: "pointer",
-                        padding: "4px",
-                      }}
-                      type="button"
-                      id="dropdownMenu"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <i className="fa-solid fa-ellipsis-vertical text-secondary fs-4"></i>
-                    </button>
-                    <ul
-                      className="dropdown-menu"
-                      aria-labelledby="dropdownMenu"
-                    >
-                      <li className="dropdown-item">VIEW RECEIPT</li>
+            {successefulTransaction?.data?.length === 0 ? (
+              <div>No Data</div>
+            ) : (
+              successefulTransaction?.data?.map((item, i) => (
+                <tr key={i}>
+                  <td>{item.application.applicationId.slice(0, 4)}</td>
+                  <td>
+                    {item?.customer?.firstName && item?.customer?.lastName}
+                  </td>
+                  <td>{formatter.format(item.amount || 0)}</td>
+                  <td>{item.transactionType}</td>
+                  <td>{item.house.type}</td>
+                  <td>{item.house.cityName}</td>
+                  <td>{new Date(item.dateOfPayment).toDateString()}</td>
+                  <td>
+                    <div className="dropdown">
+                      <button
+                        className="btn"
+                        style={{
+                          all: "unset",
+                          cursor: "pointer",
+                          padding: "4px",
+                        }}
+                        type="button"
+                        id="dropdownMenu"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <i className="fa-solid fa-ellipsis-vertical text-secondary fs-4"></i>
+                      </button>
+                      <ul
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenu"
+                      >
+                        <li className="dropdown-item">VIEW RECEIPT</li>
 
-                      <li className="dropdown-item">DOWNLOAD RECEIPT</li>
-                    </ul>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                        <li className="dropdown-item">DOWNLOAD RECEIPT</li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
@@ -181,34 +168,4 @@ const tableHead = [
   "PLAN",
   "PAYMENT DATE",
   "",
-];
-
-const tableItems = [
-  {
-    id: 7686,
-    name: "Ngutor Ikpaahindi",
-    amount: "N460,700",
-    paymentT: "Repayment",
-    property: "No 23 Joseph Waku street",
-    plan: "Family Plan",
-    paymentDate: "4th October 2023",
-  },
-  {
-    id: 6686,
-    name: "Ngutor Ikpaahindi",
-    amount: "N460,700",
-    paymentT: "Repayment",
-    property: "No 23 Joseph Waku street",
-    plan: "Family Plan",
-    paymentDate: "4th October 2023",
-  },
-  {
-    id: 5686,
-    name: "Ngutor Ikpaahindi",
-    amount: "N460,700",
-    paymentT: "Repayment",
-    property: "No 23 Joseph Waku street",
-    plan: "Family Plan",
-    paymentDate: "4th October 2023",
-  },
 ];

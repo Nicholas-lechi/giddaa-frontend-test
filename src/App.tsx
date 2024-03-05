@@ -1,6 +1,7 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import "bootstrap/dist/js/bootstrap.js";
+
 import AppRoutes from "./app/routes";
 import axios from "axios";
 import Cookies from "js-cookie";
