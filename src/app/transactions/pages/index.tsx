@@ -29,6 +29,7 @@ const Transactions: React.FC = () => {
           <div className="d-flex fs-2 tab">
             {tabs.map((tab) => (
               <p
+                key={tab.tab}
                 className={`${tab.tab === tabIndex ? "active" : ""} m-0`}
                 onClick={() => setTabIndex(tab.tab)}
               >

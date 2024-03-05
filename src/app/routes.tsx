@@ -4,10 +4,12 @@ import HomePage from "./home/page/home.index";
 import DashboardLayout from "./layouts/dashboard.layout";
 import DashboardHome from "./components/DashboardHome";
 import Transactions from "./transactions/pages";
+import Login from "./components/Login";
 
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
+      <Route path="/login" element={<Login />} />
       <Route path="/" element={<HomePage />} />
       <Route element={<DashboardLayout />}>
         <Route path="dashboard" index element={<DashboardHome />} />

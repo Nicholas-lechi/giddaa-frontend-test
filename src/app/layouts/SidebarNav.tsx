@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
+import Cookies from "js-cookie";
+import { TOKEN_NAME } from "../../utils/constant";
+
 export interface INavList {
   name: string;
   link: string;
@@ -9,6 +12,27 @@ export interface INavList {
 
 const SidebarNav: React.FC = () => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      sidebarRef.current &&
+      !sidebarRef.current.contains(event.target as Node)
+    ) {
+      setShowSidebar(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const logout = () => {
+    Cookies.remove(TOKEN_NAME);
+    window.location.href = "/login";
+  };
   return (
     <Wrapper>
       <button
@@ -17,7 +41,10 @@ const SidebarNav: React.FC = () => {
       >
         <i className="fa-solid fa-bars"></i>
       </button>
-      <div className={`${showSidebar ? "open" : "close"} sidebar`}>
+      <div
+        className={`${showSidebar ? "open" : "close"} sidebar`}
+        ref={sidebarRef}
+      >
         <div>
           <Link to="/dashboard">
             <img
@@ -59,7 +86,7 @@ const SidebarNav: React.FC = () => {
             <div className="d-flex close-icon">
               <button
                 className="btn"
-                onClick={() => setShowSidebar(!showSidebar)}
+                onClick={() => setShowSidebar(showSidebar)}
               >
                 <i className="fa-solid fa-xmark"></i>
               </button>
@@ -79,7 +106,7 @@ const SidebarNav: React.FC = () => {
                   <li
                     className="nav-item"
                     key={i}
-                    onClick={() => setShowSidebar(!showSidebar)}
+                    onClick={() => setShowSidebar(showSidebar)}
                   >
                     <NavLink
                       className={({ isActive }) =>
@@ -97,7 +124,7 @@ const SidebarNav: React.FC = () => {
           </div>
           <ul className="nav flex-column bottom">
             <li className="nav-item">
-              <button className="nav-link">Log Out</button>
+              <button className=" btn btn-danger">Log Out</button>
             </li>
           </ul>
         </div>
@@ -112,7 +139,8 @@ const Wrapper = styled.div`
     .nav {
       &-item {
         font-weight: bold;
-        a {
+        a,
+        .nav-link {
           display: flex;
           align-items: center;
           text-decoration: none;

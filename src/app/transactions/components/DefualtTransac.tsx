@@ -1,32 +1,47 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import axios from "axios";
-import Cookies from "js-cookie";
-import { TOKEN_NAME } from "../../../utils/constant";
+import { useTransactionStore } from "../../store/transaction.store";
+import { formatter } from "../../../utils/helper";
 
 const DefualtTransac: React.FC = () => {
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await axios.get(
-          "/developer/transaction/get-missed-payments",
-          {
-            headers: {
-              Authorization: Cookies.get(TOKEN_NAME),
-            },
-          }
-        );
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+  const { defaultTrans, summary } = useTransactionStore();
+
+  const defaultbreakdown = [
+    {
+      value: formatter.format(summary?.expectedEarnings || 0),
+      info: "/images/info.png",
+      type: "Expected Earnings",
+    },
+    {
+      value: formatter.format(summary?.totalEarned || 0),
+      info: "/images/info.png",
+      type: "Expected Earnings",
+    },
+
+    {
+      value: summary?.transactionDefaultRate,
+      info: "/images/info.png",
+      type: "Transaction Default Rate",
+    },
+    {
+      value: (
+        <p style={{ fontSize: "32px" }}>
+          <span className="text-danger " style={{ fontWeight: "bold" }}>
+            {summary?.totalMissedTransactions}
+          </span>
+          of {summary?.totalPaidTransactions}
+        </p>
+      ),
+      info: "/images/info.png",
+      type: "Customers who’ve missed payment",
+    },
+  ];
+
   return (
     <Warpper>
       <div className="expected">
-        {defaultbreakdown.map((defaults) => (
-          <div className="content">
+        {defaultbreakdown.map((defaults, i) => (
+          <div className="content" key={i}>
             <p className="info">
               <img src={defaults.info} alt="" />
             </p>
@@ -35,6 +50,7 @@ const DefualtTransac: React.FC = () => {
           </div>
         ))}
       </div>
+
       <div className="mt-5">
         <p className="m-0 info ">
           Data on payments that should have beeen made but weren’t and the
@@ -55,15 +71,15 @@ const DefualtTransac: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {tableItems.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>{item.amount}</td>
-                <td>{item.paymentT}</td>
-                <td>{item.property}</td>
-                <td>{item.plan}</td>
-                <td>{item.paymentDate}</td>
+            {defaultTrans?.data?.map((item, i) => (
+              <tr key={i}>
+                <td>{item.application.applicationId.slice(0, 4)}</td>
+                <td>{item?.customer?.firstName && item?.customer?.lastName}</td>
+                <td>{formatter.format(item.amount || 0)}</td>
+                <td>{item.transactionType}</td>
+                <td>{item.house.type}</td>
+                <td>{item.house.cityName}</td>
+                <td>{new Date(item.dateOfPayment).toDateString()}</td>
                 <td>
                   <div className="dropdown">
                     <button
@@ -84,15 +100,9 @@ const DefualtTransac: React.FC = () => {
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenu"
                     >
-                      <li className="dropdown-item d-flex gap-2 align-items-center">
-                        <img src="/images/bell.png" alt="" />
-                        VIEW RECEIPT
-                      </li>
+                      <li className="dropdown-item">VIEW RECEIPT</li>
 
-                      <li className="dropdown-item gap-2 d-flex align-items-center">
-                        <img src="/images/money.png" alt="" />
-                        DOWNLOAD RECEIPT
-                      </li>
+                      <li className="dropdown-item">DOWNLOAD RECEIPT</li>
                     </ul>
                   </div>
                 </td>
@@ -150,37 +160,6 @@ const Warpper = styled.div`
   }
 `;
 
-const defaultbreakdown = [
-  {
-    value: "N112,000,000",
-    info: "/images/info.png",
-    type: "Expected Earnings",
-  },
-  {
-    value: "N11,000,000",
-    info: "/images/info.png",
-    type: "Total Earnings",
-  },
-
-  {
-    value: "34",
-    info: "/images/info.png",
-    type: "Expected Earnings",
-  },
-  {
-    value: (
-      <p style={{ fontSize: "32px" }}>
-        <span className="text-danger " style={{ fontWeight: "bold" }}>
-          24{" "}
-        </span>
-        of 98
-      </p>
-    ),
-    info: "/images/info.png",
-    type: "Customers who’ve missed payment",
-  },
-];
-
 const tableHead = [
   "ID",
   "CUSTOMER",
@@ -190,34 +169,4 @@ const tableHead = [
   "PLAN",
   "PAYMENT DUE DATE",
   "",
-];
-
-const tableItems = [
-  {
-    id: 7686,
-    name: "Ngutor Ikpaahindi",
-    amount: "N460,700",
-    paymentT: "Repayment",
-    property: "No 23 Joseph Waku street",
-    plan: "Family Plan",
-    paymentDate: "4th October 2023",
-  },
-  {
-    id: 6686,
-    name: "Ngutor Ikpaahindi",
-    amount: "N460,700",
-    paymentT: "Repayment",
-    property: "No 23 Joseph Waku street",
-    plan: "Family Plan",
-    paymentDate: "4th October 2023",
-  },
-  {
-    id: 5686,
-    name: "Ngutor Ikpaahindi",
-    amount: "N460,700",
-    paymentT: "Repayment",
-    property: "No 23 Joseph Waku street",
-    plan: "Family Plan",
-    paymentDate: "4th October 2023",
-  },
 ];
