@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SidebarNav from "./SidebarNav";
 import { useEffect, useState } from "react";
@@ -107,8 +107,10 @@ const DashboardLayout: React.FC = () => {
       getExpected(),
     ]).finally(() => setLoading(false));
   }, []);
-
-  if (loading)
+  const token = Cookies.get(TOKEN_NAME);
+  const navigate = useNavigate();
+  if (!token) navigate("/login");
+  else if (loading)
     return (
       <div
         style={{
