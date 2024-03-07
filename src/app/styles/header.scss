@@ -1,0 +1,126 @@
+.header {
+  background-color: #f2f2f2;
+  width: 100%;
+  box-shadow: 0px 3px 6px #00000005;
+  &-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    .login {
+      background: #335f32;
+      border-radius: 20px;
+      a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+      }
+    }
+    .notification {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #335f32;
+      i {
+        color: white;
+        font-size: 16px;
+      }
+      .count {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 6px;
+        left: 1.4rem;
+        background: white;
+        color: #335f32;
+        width: 12px;
+        height: 12px;
+        font-size: 10px;
+        border-radius: 50%;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.mobile {
+  background-color: #f2f2f26b;
+
+  display: none;
+  height: 100vh;
+  transition: 1s ease-in-out;
+  min-width: 100vw;
+  transition: 0.5s;
+  .close-icon {
+    // background-color: #f0f0f0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    .btn {
+      i {
+        font-size: 28px;
+        color: #335f32;
+      }
+    }
+  }
+
+  &-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    background-color: #f2f2f2;
+
+    width: 100vw;
+    height: 100vh;
+    .logn {
+      margin-top: 1rem;
+      background: #335f32;
+      border-radius: 20px;
+      padding: 10px 2rem;
+      a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+      }
+    }
+
+    ul {
+      display: flex;
+      gap: 1rem;
+      li {
+        a {
+          color: #4b4b4b;
+          text-decoration: none;
+          font-weight: 400;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          gap: 3px;
+          .dot {
+            display: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #335f32;
+          }
+        }
+        .active {
+          color: #335f32;
+          font-weight: bold;
+          .dot {
+            display: block;
+          }
+        }
+      }
+      @media screen and (max-width: 920px) {
+        flex-direction: column;
+      }
+    }
+  }
+}

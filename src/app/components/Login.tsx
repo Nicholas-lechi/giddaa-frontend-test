@@ -46,8 +46,8 @@ const Login: React.FC = () => {
         </div>
         <div className="left container">
           <div className="d-flex justify-content-end">
-            <button className="btn " onClick={() => router("/")}>
-              Back
+            <button className="btn d-flex back" onClick={() => router("/")}>
+              Back <i className="fa-solid fa-arrow-right-long ms-2"></i>
             </button>
           </div>
           <img
@@ -95,7 +95,7 @@ const Login: React.FC = () => {
             </div>
             <div className="action">
               <button className="btn" disabled={loading}>
-                {loading ? "Loading..." : "Sign Up"}
+                {loading ? "Loading..." : "Login"}
               </button>
             </div>
           </form>
@@ -128,6 +128,14 @@ const Wrapper = styled.div`
         color: #335f32;
         font-size: 40px;
         font-family: Millik;
+      }
+      .back {
+        align-items: center;
+        border: 1px solid #335f32;
+        border-radius: 20px;
+        i {
+          color: #335f32;
+        }
       }
       form {
         margin-top: 1rem;
@@ -167,6 +175,25 @@ const Wrapper = styled.div`
             padding: 1.5rem 5rem;
             color: white;
             font-weight: 600;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 920px) {
+      .right {
+        display: none;
+      }
+      .left {
+        width: 100%;
+        .welcome-text {
+          font-size: 20px;
+        }
+        form {
+          .action {
+            .btn {
+              padding: 1rem 3rem;
+              width: 100%;
+            }
           }
         }
       }
