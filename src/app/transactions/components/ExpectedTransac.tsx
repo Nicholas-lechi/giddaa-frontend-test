@@ -4,14 +4,14 @@ import { useTransactionStore } from "../../store/transaction.store";
 import { formatter } from "../../../utils/helper";
 
 const ExpectedTransac: React.FC = () => {
-  const { expected } = useTransactionStore();
+  const { expected, summary } = useTransactionStore();
   return (
     <Wrapper>
       <div className="content">
         <p className="info">
           <img src="/images/info.png" alt="" />
         </p>
-        <p className="value">{expected?.totalPages}</p>
+        <p className="value">{summary?.expectedNumberOfTransactions}</p>
         <p className="type m-0">Expected Transactions</p>
       </div>
 

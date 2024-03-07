@@ -108,7 +108,7 @@ const TranscSumary: React.FC = () => {
             <p className="info">
               <img src={defaults.info} alt="" />
             </p>
-            <p className="value">{defaults.value}</p>
+            <div className="value">{defaults.value}</div>
             <small className="type">{defaults.type}</small>
           </div>
         ))}

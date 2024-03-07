@@ -12,6 +12,21 @@ const HomePage: React.FC = () => {
   const [accordion3, setAccordion3] = useState(false);
   const [accordion4, setAccordion4] = useState(false);
   const [tab, setTab] = useState(2);
+  const [show, setShow] = useState(true);
+
+  // const showRef = useRef<HTMLDivElement>(null);
+  // const handleClickOutside = (event: MouseEvent) => {
+  //   if (showRef.current && !showRef.current.contains(event.target as Node)) {
+  //     setShow(true);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [showRef]);
 
   return (
     <div className="home">
@@ -40,26 +55,33 @@ const HomePage: React.FC = () => {
             <img src="/images/grid-photo.png" alt="grid" />
           </div>
         </div>
-        <div className="login-section ">
-          <div className="inner container">
-            <div className="d-flex">
-              <p className="login-text m-0">
-                Create an Account <span className="text-dark">or</span> Login
-              </p>
-              <p className="text-dark ms-1 m-0">
-                to Easily Discover Properties You Can Afford
-              </p>
+        {show && (
+          <div className="login-section ">
+            <div className="inner container">
+              <div className="d-flex">
+                <p className="login-text m-0">
+                  Create an Account <span className="text-dark">or</span> Login
+                </p>
+                <p className="text-dark ms-1 m-0">
+                  to Easily Discover Properties You Can Afford
+                </p>
+              </div>
+              <div className="actions">
+                <button className="btn affordable">Affordable</button>
+                <hr />
+                <button className="btn create">Create Account</button>
+                <span>or</span>
+                <button className="btn login">Log In</button>
+              </div>
+              <img
+                src="/images/x.png"
+                alt=""
+                onClick={() => setShow(!show)}
+                style={{ cursor: "pointer" }}
+              />
             </div>
-            <div className="actions">
-              <button className="btn affordable">Affordable</button>
-              <hr />
-              <button className="btn create">Create Account</button>
-              <span>or</span>
-              <button className="btn login">Log In</button>
-            </div>
-            <img src="/images/x.png" alt="" />
           </div>
-        </div>
+        )}
         <div className="partner">
           <div className="inner ">
             <div className="tag">
@@ -71,7 +93,7 @@ const HomePage: React.FC = () => {
               </div>
               <div className="marquee container pb-4">
                 <Marquee speed={20}>
-                  <div className="d-flex justify-content-between gap-4 pb-4 pt-4">
+                  <div className="d-flex  gap-4 pb-4 pt-4">
                     <img src="/images/viber.png" alt="" />
                     <img src="/images/dropbox.png" alt="" />
                     <img src="/images/chrome.png" alt="" />
@@ -457,38 +479,40 @@ const HomePage: React.FC = () => {
           </div>
         </div>
         <div className="remote">
-          <div className="inner container">
-            <div className="left-side">
-              <img src="/images/cloud.png" alt="" className="mb-4" />
-              <p className="naija">Naija Remote Workers</p>
-              <p className="text-light">
-                Do you work from home? Your own Home? With Giddaa, that’s
-                possible. You don’t need to have all the money at once to buy a
-                house to become a homeowner. Leverage your job flexibility
-                working remotely and your current earning capacity to build
-                equity in a home of your own.
-              </p>
-              <div className="d-flex justify-content-between">
-                <div className="accordion">
-                  <p className="a-btn">
-                    <span>
-                      <i className="fa-solid fa-angle-down"></i>
-                    </span>
-                    We Eliminate Price Discrimination{" "}
-                  </p>
-                </div>
-                <div className="accordion">
-                  <p className="a-btn">
-                    <span>
-                      <i className="fa-solid fa-angle-down"></i>
-                    </span>
-                    We Have all the Information You Need{" "}
-                  </p>
+          <div className="remote-overlay">
+            <div className="inner container">
+              <div className="left-side">
+                <img src="/images/cloud.png" alt="" className="mb-4" />
+                <p className="naija">Naija Remote Workers</p>
+                <p className="text-light">
+                  Do you work from home? Your own Home? With Giddaa, that’s
+                  possible. You don’t need to have all the money at once to buy
+                  a house to become a homeowner. Leverage your job flexibility
+                  working remotely and your current earning capacity to build
+                  equity in a home of your own.
+                </p>
+                <div className="d-flex justify-content-between">
+                  <div className="accordion">
+                    <p className="a-btn">
+                      <span>
+                        <i className="fa-solid fa-angle-down"></i>
+                      </span>
+                      We Eliminate Price Discrimination{" "}
+                    </p>
+                  </div>
+                  <div className="accordion">
+                    <p className="a-btn">
+                      <span>
+                        <i className="fa-solid fa-angle-down"></i>
+                      </span>
+                      We Have all the Information You Need{" "}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="right-side">
-              <img src="/images/mnaa.png" alt="" />
+              <div className="right-side">
+                <img src="/images/mnaa.png" alt="" />
+              </div>
             </div>
           </div>
         </div>

@@ -15,5 +15,6 @@ const Wrapper = styled.div`
   .dashboard-home {
     font-family: Millik;
     font-size: 24px;
+    margin-top: 5rem;
   }
 `;

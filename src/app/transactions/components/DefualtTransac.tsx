@@ -5,7 +5,7 @@ import { formatter } from "../../../utils/helper";
 
 const DefualtTransac: React.FC = () => {
   const { defaultTrans, summary } = useTransactionStore();
-
+  console.log(defaultTrans);
   const defaultbreakdown = [
     {
       value: formatter.format(summary?.expectedEarnings || 0),
@@ -13,15 +13,15 @@ const DefualtTransac: React.FC = () => {
       type: "Expected Earnings",
     },
     {
-      value: formatter.format(summary?.totalEarned || 0),
+      value: formatter.format(summary?.totalTransactions || 0),
       info: "/images/info.png",
-      type: "Expected Earnings",
+      type: "Total Default Amount",
     },
 
     {
-      value: summary?.transactionDefaultRate,
+      value: summary?.totalMissedTransactions,
       info: "/images/info.png",
-      type: "Transaction Default Rate",
+      type: "Missed Payments",
     },
     {
       value: (
@@ -45,7 +45,7 @@ const DefualtTransac: React.FC = () => {
             <p className="info">
               <img src={defaults.info} alt="" />
             </p>
-            <p className="value">{defaults.value}</p>
+            <div className="value">{defaults.value}</div>
             <small className="type">{defaults.type}</small>
           </div>
         ))}
