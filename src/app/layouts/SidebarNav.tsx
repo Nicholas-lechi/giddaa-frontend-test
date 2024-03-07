@@ -74,14 +74,20 @@ const SidebarNav: React.FC = () => {
         </div>
         <ul className="nav flex-column bottom">
           <li className="nav-item">
-            <button className="nav-link">Log Out</button>
+            <button
+              className="btn nav-link text-danger d-flex align-items-center"
+              onClick={logout}
+            >
+              Log Out{" "}
+              <i className="fa-solid fa-arrow-right-from-bracket text-danger ms-4"></i>
+            </button>
           </li>
         </ul>
       </div>
 
       <div className={`${showSidebar ? "open" : "close"} mobile`}>
         <div className="mobile-inner">
-          <div>
+          <div className="w-full" style={{ width: "100%" }}>
             <div className="d-flex close-icon">
               <button
                 className="btn"
@@ -123,8 +129,12 @@ const SidebarNav: React.FC = () => {
           </div>
           <ul className="nav flex-column bottom">
             <li className="nav-item">
-              <button className=" btn btn-danger" onClick={logout}>
-                Log Out
+              <button
+                className="btn nav-link text-danger d-flex align-items-center"
+                onClick={logout}
+              >
+                Log Out{" "}
+                <i className="fa-solid fa-arrow-right-from-bracket text-danger ms-4"></i>
               </button>
             </li>
           </ul>

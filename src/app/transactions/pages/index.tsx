@@ -68,6 +68,8 @@ export default Transactions;
 
 const Wrapper = styled.div`
   .transactions {
+    height: 90vh;
+    overflow-y: scroll;
     .d-flex {
       .heading {
         font-family: Millik;

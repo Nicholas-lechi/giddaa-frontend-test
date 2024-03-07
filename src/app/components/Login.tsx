@@ -31,7 +31,6 @@ const Login: React.FC = () => {
         Cookies.set(TOKEN_NAME, res);
         window.location.href = "/dashboard";
       }
-      console.log();
     } catch (error) {
       console.log(error);
     } finally {

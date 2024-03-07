@@ -38,7 +38,10 @@ const Header: React.FC = () => {
             <img src="/images/giddaa.png" alt="" />
           </Link>
           <div className="form-group">
-            <input type="search" />
+            <input
+              type="search"
+              placeholder="Search For Properties, Developers, Banks"
+            />
             <i className="fa-solid fa-magnifying-glass"></i>
           </div>
           <ul className="nav ">
