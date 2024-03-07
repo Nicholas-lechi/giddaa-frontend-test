@@ -124,7 +124,7 @@ const DashboardLayout: React.FC = () => {
         <p>
           <i
             className="fa-solid fa-arrows-rotate fa-spin"
-            style={{ color: "#335f32", fontSize: "80px" }}
+            style={{ color: "#335f32", fontSize: "90px" }}
           ></i>
         </p>
       </div>
