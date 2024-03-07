@@ -3,8 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Cookies from "js-cookie";
 import { TOKEN_NAME } from "../../utils/constant";
-
-export interface INavList {
+interface INavList {
   name: string;
   link: string;
   icon: string;
@@ -124,7 +123,9 @@ const SidebarNav: React.FC = () => {
           </div>
           <ul className="nav flex-column bottom">
             <li className="nav-item">
-              <button className=" btn btn-danger">Log Out</button>
+              <button className=" btn btn-danger" onClick={logout}>
+                Log Out
+              </button>
             </li>
           </ul>
         </div>
