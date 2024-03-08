@@ -38,6 +38,10 @@ _**Before you start the project please run yarn on your termina**l_
 ```bash
 To run the project
 
+Please pull from main
+#with
+git pull origin main
+
 #To start
 yarn dev
 
