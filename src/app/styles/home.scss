@@ -73,7 +73,7 @@
       left: 0;
       right: 0;
       // transform: translate(-50%, -50%);
-      z-index: 2;
+      z-index: 3;
       .inner {
         height: 93px;
         display: flex;
@@ -130,8 +130,15 @@
           height: auto;
           flex-direction: column;
           gap: 1.5rem;
+          position: relative;
+          padding: 1rem;
           .d-flex {
             flex-direction: column;
+          }
+          .n-del {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
           }
         }
       }
@@ -816,64 +823,85 @@
           margin-top: 1rem;
           gap: 5%;
           .work-left {
-            width: 40%;
+            width: 35%;
             .tabs {
-              padding: 3rem 1rem 5rem 1rem;
+              padding: 3rem 0 5rem 0;
               background: #ffffff;
               border: 2px solid #335f32;
               border-radius: 20px;
-              .tab {
-                display: flex;
-                padding: 2rem 1rem;
-                gap: 8px;
-                align-items: center;
-                cursor: pointer;
-                .lft {
-                  span {
-                    margin-left: 2rem;
-                    font-family: Millik;
-                    width: 2rem;
-                    height: 2rem;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border: 1px solid #335f32;
-                    opacity: 70%;
-                  }
-                  img {
-                    width: 4rem;
+              z-index: 2;
+              .tab-holder {
+                position: relative;
+                .pointer {
+                  width: 2rem;
+                  height: 2rem;
+                  position: absolute;
+                  right: -0.6rem;
+                  top: 4rem;
+                  background: #335f32;
+                  z-index: -1;
+                  transform: rotate(45deg);
+                }
+                &:last-child {
+                  .pointer {
+                    top: 3rem;
                   }
                 }
-                .rit {
-                  .m-0 {
-                    color: #000000;
-                    font-family: Millik;
-                    opacity: 70%;
-                    font-size: 20px;
+                .tab {
+                  display: flex;
+                  z-index: 2;
+                  padding: 2rem 1rem;
+                  gap: 8px;
+                  align-items: center;
+                  cursor: pointer;
+                  .lft {
+                    span {
+                      margin-left: 2rem;
+                      font-family: Millik;
+                      width: 2rem;
+                      height: 2rem;
+                      border-radius: 50%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      border: 1px solid #335f32;
+                      opacity: 70%;
+                    }
+                    img {
+                      width: 4rem;
+                    }
+                  }
+                  .rit {
+                    .m-0 {
+                      color: #000000;
+                      font-family: Millik;
+                      opacity: 70%;
+                      font-size: 20px;
+                    }
                   }
                 }
-              }
-              .active {
-                background: #f3faf2;
-                .lft {
-                  span {
-                    background: #335f32;
-                    opacity: 1;
-                    color: white;
+                .active {
+                  background: #f3faf2;
+
+                  .lft {
+                    span {
+                      background: #335f32;
+                      opacity: 1;
+                      color: white;
+                    }
                   }
-                }
-                .rit {
-                  .m-0 {
-                    color: #335f32;
-                    opacity: 1;
+                  .rit {
+                    .m-0 {
+                      color: #335f32;
+                      opacity: 1;
+                    }
                   }
                 }
               }
             }
           }
           .work-right {
-            width: 60%;
+            width: 65%;
             border: 1px solid #335f32;
             border-radius: 30px;
             .play-value {

@@ -75,6 +75,7 @@ const HomePage: React.FC = () => {
               </div>
               <img
                 src="/images/x.png"
+                className="n-del"
                 alt=""
                 onClick={() => setShow(!show)}
                 style={{ cursor: "pointer" }}
@@ -572,43 +573,66 @@ const HomePage: React.FC = () => {
             <div className="botom">
               <div className="work-left">
                 <div className="tabs">
-                  <div
-                    className={`tab mb-2 ${tab === 1 ? "active" : ""}`}
-                    onClick={() => setTab(1)}
-                  >
-                    <div className="lft">
-                      <span>1</span>
-                      <img src="/images/tab-house.png" alt="" />
+                  <div className={`tab-holder ${tab === 1 ? "active" : ""}`}>
+                    <div
+                      className={`tab mb-2 ${tab === 1 ? "active" : ""}`}
+                      onClick={() => setTab(1)}
+                    >
+                      <div className="lft">
+                        <span>1</span>
+                        <img src="/images/tab-house.png" alt="" />
+                      </div>
+                      <div className="rit">
+                        <p className="m-0">Find Your Dream Home</p>
+                        <small>Search Through Our Proerty Listings…</small>
+                      </div>
                     </div>
-                    <div className="rit">
-                      <p className="m-0">Find Your Dream Home</p>
-                      <small>Search Through Our Proerty Listings…</small>
-                    </div>
+                    <div
+                      className={`pointer `}
+                      style={{ display: tab === 1 ? "block" : "none" }}
+                    ></div>{" "}
                   </div>
                   <div
-                    className={`tab mb-2 ${tab === 2 ? "active" : ""}`}
-                    onClick={() => setTab(2)}
+                    className={`tab-holder mb-2 ${tab === 2 ? "active" : ""}`}
                   >
-                    <div className="lft">
-                      <span>2</span>
-                      <img src="/images/card.png" alt="" />
+                    <div
+                      className={`tab mb-2 ${tab === 2 ? "active" : ""}`}
+                      onClick={() => setTab(2)}
+                    >
+                      <div className="lft">
+                        <span>2</span>
+                        <img src="/images/card.png" alt="" />
+                      </div>
+                      <div className="rit">
+                        <p className="m-0">Find Your Dream Home</p>
+                        <small>Search Through Our Proerty Listings…</small>
+                      </div>
                     </div>
-                    <div className="rit">
-                      <p className="m-0">Find Your Dream Home</p>
-                      <small>Search Through Our Proerty Listings…</small>
-                    </div>
+                    <div
+                      className={`pointer `}
+                      style={{ display: tab === 2 ? "block" : "none" }}
+                    ></div>
                   </div>
+
                   <div
-                    className={`tab ${tab === 3 ? "active" : ""}`}
-                    onClick={() => setTab(3)}
+                    className={`tab-holder mb-2 ${tab === 3 ? "active" : ""}`}
                   >
-                    <div className="lft">
-                      <span>3</span>
+                    <div
+                      className={`tab ${tab === 3 ? "active" : ""}`}
+                      onClick={() => setTab(3)}
+                    >
+                      <div className="lft">
+                        <span>3</span>
+                      </div>
+                      <div className="rit">
+                        <p className="m-0">Find Your Dream Home</p>
+                        <small>Search Through Our Proerty Listings…</small>
+                      </div>
                     </div>
-                    <div className="rit">
-                      <p className="m-0">Find Your Dream Home</p>
-                      <small>Search Through Our Proerty Listings…</small>
-                    </div>
+                    <div
+                      className={`pointer`}
+                      style={{ display: tab === 3 ? "block" : "none" }}
+                    ></div>{" "}
                   </div>
                 </div>
               </div>
