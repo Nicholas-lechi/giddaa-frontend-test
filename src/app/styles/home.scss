@@ -73,7 +73,7 @@
       left: 0;
       right: 0;
       // transform: translate(-50%, -50%);
-      z-index: 2;
+      z-index: 3;
       .inner {
         height: 93px;
         display: flex;
@@ -130,8 +130,15 @@
           height: auto;
           flex-direction: column;
           gap: 1.5rem;
+          position: relative;
+          padding: 1rem;
           .d-flex {
             flex-direction: column;
+          }
+          .n-del {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
           }
         }
       }

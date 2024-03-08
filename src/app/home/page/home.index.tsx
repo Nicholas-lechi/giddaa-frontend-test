@@ -75,6 +75,7 @@ const HomePage: React.FC = () => {
               </div>
               <img
                 src="/images/x.png"
+                className="n-del"
                 alt=""
                 onClick={() => setShow(!show)}
                 style={{ cursor: "pointer" }}
