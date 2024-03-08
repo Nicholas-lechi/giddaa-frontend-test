@@ -35,6 +35,11 @@ export default {
 
 _**Before you start the project please run yarn on your termina**l_
 
+_##For api please add env file in your root folder_
+
+#Add VITE_API_URL= api in .env
+
+
 ```bash
 To run the project
 
