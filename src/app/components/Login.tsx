@@ -27,7 +27,6 @@ const Login: React.FC = () => {
       const res = data.value.value.token;
 
       if (res) {
-        alert("Login successful!");
         Cookies.set(TOKEN_NAME, res);
         window.location.href = "/dashboard";
       }
