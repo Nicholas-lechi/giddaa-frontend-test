@@ -28,12 +28,7 @@ const DashboardLayout: React.FC = () => {
       try {
         setLoadingSummaries(true);
         const { data: value } = await axios.get(
-          "/developer/transaction/get-summary",
-          {
-            headers: {
-              Authorization: Cookies.get(TOKEN_NAME),
-            },
-          }
+          "/developer/transaction/get-summary"
         );
         setSummary(value?.value);
       } catch (error) {
@@ -47,14 +42,8 @@ const DashboardLayout: React.FC = () => {
       try {
         setLoadingDefault(true);
         const { data: value } = await axios.get(
-          "/developer/transaction/get-missed-payments",
-          {
-            headers: {
-              Authorization: Cookies.get(TOKEN_NAME),
-            },
-          }
+          "/developer/transaction/get-missed-payments"
         );
-        console.log(value?.value);
 
         setDefault(value?.value);
       } catch (error) {
@@ -67,12 +56,7 @@ const DashboardLayout: React.FC = () => {
       try {
         setLoadingExpectedTransac(true);
         const { data: value } = await axios.get(
-          "/developer/transaction/get-expected-payments",
-          {
-            headers: {
-              Authorization: Cookies.get(TOKEN_NAME),
-            },
-          }
+          "/developer/transaction/get-expected-payments"
         );
         setExpected(value?.value);
       } catch (error) {
@@ -85,12 +69,7 @@ const DashboardLayout: React.FC = () => {
       try {
         setLoadingSuccessefulTransactions(true);
         const { data: value } = await axios.get(
-          "/developer/transaction/get-succesful-payments",
-          {
-            headers: {
-              Authorization: Cookies.get(TOKEN_NAME),
-            },
-          }
+          "/developer/transaction/get-succesful-payments"
         );
         setSuccessefulTransaction(value?.value);
       } catch (error) {
@@ -107,6 +86,7 @@ const DashboardLayout: React.FC = () => {
       getExpected(),
     ]).finally(() => setLoading(false));
   }, []);
+
   const token = Cookies.get(TOKEN_NAME);
   const navigate = useNavigate();
   if (!token) navigate("/login");
@@ -124,7 +104,7 @@ const DashboardLayout: React.FC = () => {
         <p>
           <i
             className="fa-solid fa-arrows-rotate fa-spin"
-            style={{ color: "#335f32", fontSize: "90px" }}
+            style={{ color: "#335f32", fontSize: "70px" }}
           ></i>
         </p>
       </div>
